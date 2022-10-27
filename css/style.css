@@ -1,9 +1,86 @@
 body {
-  height: 100vh;
-  display: grid;
-  place-items: center;
+  height: 100px;
 }
 
 h1 {
-  place-items: center;
+  font-size: 32px;
+}
+
+p {
+  margin-right: 40px;
+  height: 100px
+}
+
+.caption {
+  left: 400px;
+}
+
+.image-slider {
+  width: 800px;
+  height: 450px;
+  background-color: gray;
+  align-items: center;
+  left: 250px;
+  display: flex;
+}
+
+.image-black {
+  position: absolute;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+
+.image-blue {
+  position: absolute;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.image-green {
+  position: absolute;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.image-original {
+  position: absolute;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.image-red {
+  position: absolute;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.leftButton {
+  position: absolute;
+  background-color: white;
+  height: 100px;
+  width:100px;
+  left: 200px;
+  top: 175px;
+  align-items: center;
+}
+
+.rightButton {
+  position: absolute;
+  background-color: white;
+  height: 100px;
+  width:100px;
+  left: 400px;
+  top: 175px;
+  align-items: center;
 }
