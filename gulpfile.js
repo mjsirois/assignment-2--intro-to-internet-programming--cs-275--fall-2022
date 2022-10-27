@@ -17,14 +17,14 @@ async function chrome () {
 
 let validateHTML = () => {
     return src([
-        `dev/index.html`])
+        `index.html`])
         .pipe(htmlValidator(undefined));
 };
 
 exports.validateHTML = validateHTML;
 
 let lintCSS = () => {
-    return src([`dev/css/style.css`])
+    return src([`css/style.css`])
         .pipe(CSSLinter({
             failAfterError: false,
             reporters: [
@@ -36,7 +36,7 @@ let lintCSS = () => {
 exports.lintCSS = lintCSS;
 
 let lintJS = () => {
-    return src([`dev/js/app.js`])
+    return src([`js/app.js`])
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`));
 };
@@ -44,7 +44,7 @@ let lintJS = () => {
 exports.lintJS = lintJS;
 
 let transpileJSForDev = () => {
-    return src(`dev/js/app.js`)
+    return src(`js/app.js`)
         .pipe(babel())
         .pipe(dest(`temp/js`));
 };
@@ -52,7 +52,7 @@ let transpileJSForDev = () => {
 exports.transpileJSForDev = transpileJSForDev;
 
 let transpileJSForProd = () => {
-    return src(`dev/js/app.js`)
+    return src(`js/app.js`)
         .pipe(babel())
         .pipe(jsCompressor())
         .pipe(dest(`prod/js`));
@@ -61,7 +61,7 @@ let transpileJSForProd = () => {
 exports.transpileJSForProd = transpileJSForProd;
 
 let compressHTML = () => {
-    return src([`dev/index.html`])
+    return src([`index.html`])
         .pipe(htmlCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod`));
 };
@@ -69,7 +69,7 @@ let compressHTML = () => {
 exports.compressHTML = compressHTML;
 
 let compressCSS = () => {
-    return src('dev/css/style.css')
+    return src('css/style.css')
       .pipe(cssCompressor({compatibility: 'ie8'}))
       .pipe(dest('prod/css'));
 };
@@ -84,21 +84,21 @@ let serve = () => {
         server: {
             baseDir: [
                 `temp`,
-                `dev`,
-                `dev/css`,
-                `dev/js`
+                `.`,
+                `css`,
+                `js`
             ]
         }
     });
 }
 
-    watch(`dev/js/app.js`, series(lintJS, transpileJSForDev))
+    watch(`js/app.js`, series(lintJS, transpileJSForDev))
         .on(`change`, reload);
 
-    watch(`dev/css/style.css`, series(lintCSS, compressCSS))
+    watch(`css/style.css`, series(lintCSS))
         .on(`change`, reload);
 
-    watch(`dev/index.html`, validateHTML)
+    watch(`index.html`, validateHTML)
         .on(`change`, reload);
 
 exports.serve = series(
